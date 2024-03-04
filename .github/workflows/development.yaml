@@ -9,8 +9,8 @@ name: Development
 #       - reopened
 
 on:
-  push:
-    branches: [ main, beta ]
+  workflow_call:
+
 jobs:
   test-frontend:
     name: Test Frontend
