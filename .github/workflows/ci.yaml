@@ -16,7 +16,7 @@ on:
     types: [published]
 jobs:
   test:
-    uses: ${{ github.workspace }}/.github/workflows/development.yml
+    uses: ./.github/workflows/development.yml
     name: Test
   test-coverage:
     name: Test Coverage Upload
