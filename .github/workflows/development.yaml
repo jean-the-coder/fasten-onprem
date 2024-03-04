@@ -8,6 +8,9 @@ name: Development
 #       - synchronize
 #       - reopened
 
+on:
+  push:
+    branches: [ main, beta ]
 jobs:
   test-frontend:
     name: Test Frontend
