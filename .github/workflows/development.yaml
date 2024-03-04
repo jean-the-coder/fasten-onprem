@@ -13,9 +13,9 @@ jobs:
     name: Test Frontend
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
-      - name: test
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20.x
@@ -35,12 +35,14 @@ jobs:
     env:
       STATIC: true
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
-      - name: Test Backend
+      - name: Setup
         run: |
           go install github.com/golang/mock/mockgen@v1.6.0
           go generate ./...
+      - name: Test Backend
+        run: |
           make test-backend-coverage
           CGO_ENABLED=0 go build -buildvcs=false ./backend/cmd/fasten/
       - name: Upload coverage
@@ -53,7 +55,12 @@ jobs:
     name: Compile Storybook
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
       - run: |
           make build-storybook
 
