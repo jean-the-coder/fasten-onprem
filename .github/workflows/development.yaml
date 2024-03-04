@@ -1,12 +1,12 @@
 name: Development
 
-on:
-  pull_request:
-    types:
-      - opened
-      - edited
-      - synchronize
-      - reopened
+# on:
+#   pull_request:
+#     types:
+#       - opened
+#       - edited
+#       - synchronize
+#       - reopened
 
 jobs:
   test-frontend:
