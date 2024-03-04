@@ -16,8 +16,7 @@ on:
     types: [published]
 jobs:
   test:
-    uses: ./.github/workflows/development.yml
-    name: Test
+    uses: ./.github/workflows/development.yaml
   test-coverage:
     name: Test Coverage Upload
     needs:
