@@ -118,18 +118,28 @@ export class ObservationBarChartComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    if(!this.observations || !this.observations[0]) {
+    if(!this.observations || !this.observations[0] || !this.observations[0].value_model.visualizationTypes().includes('bar')) {
       return;
     }
 
-    let currentValues: number[] = []
+    let currentValues = []
     let referenceRanges = []
 
     for(let observation of this.observations) {
       let refRange = observation.reference_range;
 
       referenceRanges.push([refRange.low || 0, refRange.high || 0]);
-      currentValues.push(observation.value_quantity_value);
+
+      // debating pushing this value logic into the value_model.
+      // maybe have methods for <visualizationType>ChartData that returns the expected value.
+      // TODO: figure out after I try implementing some other chart types
+      // @ts-ignore
+      let value = observation.value_model.valueObject;
+      if (value.range) {
+        currentValues.push([value.range.low, value.range.high]);
+      } else {
+        currentValues.push([value.value, value.value])
+      }
 
       if (observation.effective_date) {
         this.barChartLabels.push(formatDate(observation.effective_date, "mediumDate", "en-US", undefined));
@@ -141,7 +151,7 @@ export class ObservationBarChartComponent implements OnInit {
       this.barChartData[1]['dataLabels'].push(observation.value_quantity_unit);
     }
 
-    let xAxisMax = Math.max(...currentValues) * 1.3;
+    let xAxisMax = Math.max(...currentValues.map(set => set[1])) * 1.3;
     this.barChartOptions.scales['x']['max'] = xAxisMax
 
     let updatedRefRanges = referenceRanges.map(range => {
@@ -154,7 +164,7 @@ export class ObservationBarChartComponent implements OnInit {
 
     // @ts-ignore
     this.barChartData[0].data = updatedRefRanges
-    this.barChartData[1].data = currentValues.map(v => [v, v])
+    this.barChartData[1].data = currentValues
 
     this.chartHeight = defaultChartHeight + (defaultChartEntryHeight * currentValues.length)
   }

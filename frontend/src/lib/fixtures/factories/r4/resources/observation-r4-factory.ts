@@ -9,6 +9,44 @@ class ObservationR4Factory extends Factory<{}> {
     })
   }
 
+  valueInteger(value?: number) {
+    return this.params({
+      valueQuantity: null,
+      valueInteger: value || 4.9
+    })
+  }
+
+  valueCodeableConcept() {
+    return this.params({
+      valueQuantity: null,
+      valueCodeableConcept: {
+        coding: [
+          {
+            system: 'http://snomed.info/sct',
+            code: '260373001',
+            display: 'Detected (qualifier value)',
+            userSelected: false
+          }
+        ],
+        text: 'Detected'
+      },
+    })
+  }
+
+  valueBoolean(value?: boolean) {
+    return this.params({
+      valueQuantity: null,
+      valueBoolean: value || true
+    })
+  }
+
+  // valueRange(range?: Range) {
+  //   return this.params({
+  //     valueQuantity: null,
+  //     // valueString: value || '5.5mmol/l'
+  //   })
+  // }
+
   referenceRange(high?: number, low?: number) {
     return this.params({
       referenceRange: [

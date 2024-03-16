@@ -42,3 +42,12 @@ export const Entry: Story = {
     displayModel: observation
   }
 };
+
+let observation2 = new ObservationModel(observationR4Factory.valueCodeableConcept().build(), fhirVersions.R4);
+observation.source_id = '123-456-789'
+observation.source_resource_id = '123-456-789'
+export const CodeableConcept: Story = {
+  args: {
+    displayModel: observation2
+  }
+};

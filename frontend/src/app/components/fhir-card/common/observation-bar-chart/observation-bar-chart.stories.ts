@@ -33,6 +33,36 @@ export const NoRange: Story = {
   }
 };
 
+// export const ValueQuantity: Story = {
+//   args: {
+//     observations: [new ObservationModel(observationR4Factory.valueString('<10 IntlUnit/mL').build(), fhirVersions.R4)]
+//   }
+// };
+
+// export const ValueCodeableConcept: Story = {
+//   args: {
+//     observations: [new ObservationModel(observationR4Factory.valueString('<10 IntlUnit/mL').build(), fhirVersions.R4)]
+//   }
+// };
+
+export const ValueString: Story = {
+  args: {
+    observations: [new ObservationModel(observationR4Factory.valueString('<10 IntlUnit/mL').referenceRangeOnlyHigh(50).build(), fhirVersions.R4)]
+  }
+};
+
+// export const ValueBoolean: Story = {
+//   args: {
+//     observations: [new ObservationModel(observationR4Factory.valueBoolean().build(), fhirVersions.R4)]
+//   }
+// };
+
+export const ValueInteger: Story = {
+  args: {
+    observations: [new ObservationModel(observationR4Factory.valueInteger().build(), fhirVersions.R4)]
+  }
+};
+
 export const Range: Story = {
   args: {
     observations: [new ObservationModel(observationR4Factory.referenceRange().build(), fhirVersions.R4)]

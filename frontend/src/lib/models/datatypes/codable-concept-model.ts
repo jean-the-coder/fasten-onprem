@@ -18,7 +18,11 @@ export class CodableConceptModel {
   text?: string
   coding?: CodingModel[]
   constructor(fhirData: any) {
-    this.text = _.get(fhirData, 'text', '');
+    this.text =  _.get(fhirData, 'text', '');
     this.coding = _.get(fhirData, 'coding', []);
+  }
+
+  display?(): string {
+    return this.text || this.coding[0]?.display
   }
 }
