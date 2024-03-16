@@ -1,6 +1,14 @@
 import { Factory } from 'fishery';
+import { codeableConceptR4Factory } from '../datatypes/codeable-concept-r4-factory';
+
 
 class ObservationR4Factory extends Factory<{}> {
+
+  code(codeableConcept: {}) {
+    return this.params({
+      code: codeableConcept || codeableConceptR4Factory.build()
+    })
+  }
 
   valueString(value?: string) {
     return this.params({
