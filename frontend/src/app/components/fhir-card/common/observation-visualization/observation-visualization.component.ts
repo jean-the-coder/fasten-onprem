@@ -12,7 +12,7 @@ import { ObservationTableComponent } from '../observation-table/observation-tabl
   styleUrls: ['./observation-visualization.component.scss']
 })
 export class ObservationVisualizationComponent implements OnInit {
-  @Input() observations: [ObservationModel]
+  @Input() observations: ObservationModel[]
   @Input() preferredVisualizationType?: string = 'bar'
 
   visualizationType: string = ''
