@@ -1,7 +1,3 @@
 
-  <canvas baseChart
-          [height]="chartHeight"
-          [type]="'bar'"
-          [datasets]="barChartData"
-          [labels]="barChartLabels"
-          [options]="barChartOptions"></canvas>
+<observation-bar-chart *ngIf="visualizationType == 'bar'" [observations]="observations"></observation-bar-chart>
+<observation-table *ngIf="visualizationType == 'table'" [observations]="observations"></observation-table>

@@ -1,9 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ResourceFhir } from '../../models/fasten/resource_fhir';
 import { ObservationModel } from 'src/lib/models/resources/observation-model';
+import { ObservationVisualizationComponent } from '../fhir-card/common/observation-visualization/observation-visualization.component';
 
 @Component({
   selector: 'app-report-labs-observation',
+  // imports: [ ObservationVisualizationComponent ],
   templateUrl: './report-labs-observation.component.html',
   styleUrls: ['./report-labs-observation.component.scss']
 })

@@ -3,7 +3,6 @@ import { codeableConceptR4Factory } from '../datatypes/codeable-concept-r4-facto
 
 
 class ObservationR4Factory extends Factory<{}> {
-
   code(codeableConcept: {}) {
     return this.params({
       code: codeableConcept || codeableConceptR4Factory.build()

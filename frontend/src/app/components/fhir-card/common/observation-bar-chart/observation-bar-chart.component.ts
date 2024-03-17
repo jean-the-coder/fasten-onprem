@@ -118,7 +118,7 @@ export class ObservationBarChartComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    if(!this.observations || !this.observations[0] || !this.observations[0].value_model.visualizationTypes().includes('bar')) {
+    if(!this.observations || !this.observations[0] || !this.observations[0].value_model?.visualizationTypes().includes('bar')) {
       return;
     }
 

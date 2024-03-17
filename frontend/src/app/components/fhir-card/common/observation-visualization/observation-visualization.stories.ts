@@ -32,3 +32,9 @@ export const NoRange: Story = {
     observations: [new ObservationModel(observationR4Factory.build(), fhirVersions.R4)]
   }
 };
+
+export const CodableConcept: Story = {
+  args: {
+    observations: [new ObservationModel(observationR4Factory.valueCodeableConcept().build(), fhirVersions.R4)]
+  }
+};
