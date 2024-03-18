@@ -16,18 +16,14 @@ export interface ValueObject {
   value?: number | string | boolean | null
 }
 
+// https://www.hl7.org/fhir/R4/observation.html
 export class ObservationModel extends FastenDisplayModel {
   code: CodableConceptModel | undefined
   effective_date: string
   code_coding_display: string
   code_text: string
-  // value_quantity_value: number
   value_quantity_unit: string
   status: string
-  value_codeable_concept_text: string
-  value_codeable_concept_coding_display: string
-  value_codeable_concept_coding: string
-  value_quantity_value_number: number
   subject: ReferenceModel | undefined
   fhirResource: any
   reference_range: any
@@ -48,51 +44,24 @@ export class ObservationModel extends FastenDisplayModel {
     if (fhirResource['valueInteger']) { this.value_model = new ObservationValueIntegerModel(fhirResource['valueInteger']) }
     if (fhirResource['valueBoolean']) { this.value_model = new ObservationValueBooleanModel(fhirResource['valueBoolean']) }
     if (fhirResource['valueCodeableConcept']) { this.value_model = new ObservationValueCodeableConceptModel(fhirResource['valueCodeableConcept']) }
+    // TODO: there are more value types that can be set: valueRange, valueRatio, valueSampledData, valueTime, valueDateTime, valuePeriod
+    // TODO: It is possible for values to be set in the Component element instead of any value component from above. Figure out what to do for that
 
-    // this.value_quantity_value = this.parseValue();
     this.value_quantity_unit = this.parseUnit();
     this.status = _.get(fhirResource, 'status', '');
-    this.value_codeable_concept_text = _.get(
-      fhirResource,
-      'valueCodeableConcept.text',
-    );
-    this.value_codeable_concept_coding_display = _.get(
-      fhirResource,
-      'valueCodeableConcept.coding[0].display',
-    );
-    this.value_codeable_concept_coding = _.get(
-      fhirResource,
-      'valueCodeableConcept.coding',
-      [],
-    );
 
     this.reference_range = this.parseReferenceRange();
     this.subject = _.get(fhirResource, 'subject');
   }
 
-  // private parseValue(): number {
-  //   // TODO: parseFloat would return NaN if it can't parse. Need to check and make sure that doesn't cause issues
-  //   return this.valueQuantity() || parseFloat(this.valueString())
-  // }
-
   private parseUnit(): string {
     return this.valueUnit() || this.valueStringUnit()
   }
-
-  // Look for the observation's numeric value. Use this first before valueString which is a backup if this can't be found.
-  // private valueQuantity(): number {
-  //   return _.get(this.fhirResource, "valueQuantity.value");
-  // }
 
   // Look for the observation's numeric value. Use this first before valueStringUnit which is a backup if this can't be found.
   private valueUnit(): string {
     return _.get(this.fhirResource, "valueQuantity.unit");
   }
-
-  // Use if valueQuantity can't be found. This will check for valueString and attempt to parse the first number in the string
-  // private valueString(): string {
-  //   return _.get(this.fhirResource, "valueString")?.match(/(?<value>[\d.]*)(?<text>.*)/).groups.value;
-  // }
 
   // Use if valueUnit can't be found.
   private valueStringUnit(): string {
