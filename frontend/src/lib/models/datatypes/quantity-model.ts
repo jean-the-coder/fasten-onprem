@@ -1,5 +1,6 @@
 import { Quantity } from 'fhir/r4';
 import { ValueObject } from '../resources/observation-model';
+import _ from 'lodash';
 
 // https://www.hl7.org/fhir/R4/datatypes.html#Quantity
 // Also used for SimpleQuantity which is Quantity but with the rule that 'comparator' should not be set
@@ -12,11 +13,11 @@ export class QuantityModel implements Quantity {
   valueObject: ValueObject
 
   constructor(fhirData: any) {
-    this.value = fhirData['value'];
-    this.comparator = fhirData['comparator'];
-    this.unit = fhirData['unit'];
-    this.system = fhirData['system'];
-    this.code = fhirData['code'];
+    this.value = _.get(fhirData, 'value');
+    this.comparator = _.get(fhirData, 'comparator');
+    this.unit = _.get(fhirData, 'unit');
+    this.system = _.get(fhirData, 'system');
+    this.code = _.get(fhirData, 'code');
     this.valueObject = this.parseValue();
   }
 

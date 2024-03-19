@@ -128,19 +128,18 @@ export class ObservationBarChartComponent implements OnInit {
     for(let observation of this.observations) {
       let refRange = observation.reference_range;
 
-      referenceRanges.push([refRange.low || 0, refRange.high || 0]);
-
+      referenceRanges.push([refRange.low_value || 0, refRange.high_value || 0]);
 
       // debating pushing this value logic into the value_model.
       // maybe have methods for <visualizationType>ChartData that returns the expected value.
       // TODO: figure out after I try implementing some other chart types
       // @ts-ignore
-      let value = observation.value_model.valueObject;
+      let valueObject = observation.value_model.valueObject;
 
-      if (value.range) {
-        currentValues.push([value.range.low, value.range.high]);
+      if (valueObject.range) {
+        currentValues.push([valueObject.range.low, valueObject.range.high]);
       } else {
-        currentValues.push([value.value, value.value])
+        currentValues.push([valueObject.value, valueObject.value])
       }
 
       if (observation.effective_date) {
@@ -149,7 +148,7 @@ export class ObservationBarChartComponent implements OnInit {
         this.barChartLabels.push('Unknown date');
       }
 
-      this.barChartData[0]['dataLabels'].push(observation.referenceRangeDisplay());
+      this.barChartData[0]['dataLabels'].push(observation.reference_range.display());
       this.barChartData[1]['dataLabels'].push(observation.value_quantity_unit);
     }
 
