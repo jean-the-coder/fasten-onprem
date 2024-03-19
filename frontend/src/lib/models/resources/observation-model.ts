@@ -29,7 +29,6 @@ export class ObservationModel extends FastenDisplayModel {
   effective_date: string
   code_coding_display: string
   code_text: string
-  value_quantity_unit: string
   status: string
   subject: ReferenceModel | undefined
   fhirResource: any
@@ -54,25 +53,10 @@ export class ObservationModel extends FastenDisplayModel {
     // TODO: there are more value types that can be set: valueRange, valueRatio, valueSampledData, valueTime, valueDateTime, valuePeriod
     // TODO: It is possible for values to be set in the Component element instead of any value component from above. Figure out what to do for that
 
-    this.value_quantity_unit = this.parseUnit();
     this.status = _.get(fhirResource, 'status', '');
 
     this.reference_range = new ReferenceRangeModel(_.get(this.fhirResource, 'referenceRange.0'))
 
     this.subject = _.get(fhirResource, 'subject');
-  }
-
-  private parseUnit(): string {
-    return this.valueUnit() || this.valueStringUnit()
-  }
-
-  // Look for the observation's numeric value. Use this first before valueStringUnit which is a backup if this can't be found.
-  private valueUnit(): string {
-    return _.get(this.fhirResource, "valueQuantity.unit");
-  }
-
-  // Use if valueUnit can't be found.
-  private valueStringUnit(): string {
-    return _.get(this.fhirResource, "valueString")?.match(/(?<value>[\d.]*)(?<text>.*)/).groups.text;
   }
 }
