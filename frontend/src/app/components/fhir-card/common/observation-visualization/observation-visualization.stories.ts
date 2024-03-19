@@ -27,14 +27,32 @@ const meta: Meta<ObservationVisualizationComponent> = {
 export default meta;
 type Story = StoryObj<ObservationVisualizationComponent>;
 
-export const NoRange: Story = {
+export const ValueQuantity: Story = {
   args: {
     observations: [new ObservationModel(observationR4Factory.build(), fhirVersions.R4)]
   }
 };
 
-export const CodableConcept: Story = {
+export const ValueString: Story = {
+  args: {
+    observations: [new ObservationModel(observationR4Factory.valueString().build(), fhirVersions.R4)]
+  }
+};
+
+export const ValueInteger: Story = {
+  args: {
+    observations: [new ObservationModel(observationR4Factory.valueInteger().build(), fhirVersions.R4)]
+  }
+};
+
+export const ValueCodableConcept: Story = {
   args: {
     observations: [new ObservationModel(observationR4Factory.valueCodeableConcept().build(), fhirVersions.R4)]
+  }
+};
+
+export const ValueBoolean: Story = {
+  args: {
+    observations: [new ObservationModel(observationR4Factory.valueBoolean().build(), fhirVersions.R4)]
   }
 };
