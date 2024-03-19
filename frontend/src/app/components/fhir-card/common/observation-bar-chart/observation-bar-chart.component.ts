@@ -118,7 +118,7 @@ export class ObservationBarChartComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    if(!this.observations || !this.observations[0]) {
+    if(!this.observations || !this.observations[0] || !this.observations[0].value_model?.visualizationTypes().includes('bar')) {
       return;
     }
 
@@ -130,7 +130,12 @@ export class ObservationBarChartComponent implements OnInit {
 
       referenceRanges.push([refRange.low || 0, refRange.high || 0]);
 
-      let value = observation.value_object;
+
+      // debating pushing this value logic into the value_model.
+      // maybe have methods for <visualizationType>ChartData that returns the expected value.
+      // TODO: figure out after I try implementing some other chart types
+      // @ts-ignore
+      let value = observation.value_model.valueObject;
 
       if (value.range) {
         currentValues.push([value.range.low, value.range.high]);
