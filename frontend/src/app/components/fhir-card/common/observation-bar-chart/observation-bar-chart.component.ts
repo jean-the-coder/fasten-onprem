@@ -56,12 +56,7 @@ export class ObservationBarChartComponent implements OnInit {
       tooltip: {
         callbacks: {
           label: function(context) {
-            let label = `${context.dataset.label}: ${context.parsed.x}`;
-
-            if (context.dataset.dataLabels[context.dataIndex]) {
-              return `${label} ${context.dataset.dataLabels[context.dataIndex]}`;
-            }
-            return label;
+            return `${context.dataset.label}: ${context.dataset.dataLabels[context.dataIndex]}`;
           }
         }
       }
@@ -129,6 +124,7 @@ export class ObservationBarChartComponent implements OnInit {
       let refRange = observation.reference_range;
 
       referenceRanges.push([refRange.low_value || 0, refRange.high_value || 0]);
+      this.barChartData[0]['dataLabels'].push(refRange.display());
 
       // debating pushing this value logic into the value_model.
       // maybe have methods for <visualizationType>ChartData that returns the expected value.
@@ -142,14 +138,13 @@ export class ObservationBarChartComponent implements OnInit {
         currentValues.push([valueObject.value, valueObject.value])
       }
 
+      this.barChartData[1]['dataLabels'].push(observation.value_model.display());
+
       if (observation.effective_date) {
         this.barChartLabels.push(formatDate(observation.effective_date, "mediumDate", "en-US", undefined));
       } else {
         this.barChartLabels.push('Unknown date');
       }
-
-      this.barChartData[0]['dataLabels'].push(observation.reference_range.display());
-      this.barChartData[1]['dataLabels'].push(observation.value_quantity_unit);
     }
 
     let xAxisMax = Math.max(...currentValues.map(set => set[1])) * 1.3;
