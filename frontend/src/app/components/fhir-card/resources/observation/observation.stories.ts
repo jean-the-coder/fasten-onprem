@@ -35,7 +35,7 @@ const meta: Meta<ObservationComponent> = {
 export default meta;
 type Story = StoryObj<ObservationComponent>;
 
-let observation = new ObservationModel(observationR4Factory.referenceRange().build(), fhirVersions.R4);
+let observation = new ObservationModel(observationR4Factory.valueQuantity().referenceRange().build(), fhirVersions.R4);
 observation.source_id = '123-456-789'
 observation.source_resource_id = '123-456-789'
 export const Entry: Story = {

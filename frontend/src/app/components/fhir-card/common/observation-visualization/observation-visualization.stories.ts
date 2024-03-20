@@ -29,7 +29,7 @@ type Story = StoryObj<ObservationVisualizationComponent>;
 
 export const ValueQuantity: Story = {
   args: {
-    observations: [new ObservationModel(observationR4Factory.build(), fhirVersions.R4)]
+    observations: [new ObservationModel(observationR4Factory.valueQuantity().build(), fhirVersions.R4)]
   }
 };
 
