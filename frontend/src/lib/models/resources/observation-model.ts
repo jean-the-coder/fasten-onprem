@@ -41,7 +41,7 @@ export class ObservationModel extends FastenDisplayModel {
     this.fhirResource = fhirResource
     this.source_resource_type = ResourceType.Observation
     this.effective_date = _.get(fhirResource, 'effectiveDateTime');
-    this.code = new CodableConceptModel(fhirResource['code']);
+    this.code = new CodableConceptModel(_.get(fhirResource, 'code'));
     this.code_coding_display = _.get(fhirResource, 'code.coding.0.display');
     this.code_text = _.get(fhirResource, 'code.text', '');
 
