@@ -6,6 +6,14 @@ describe('ReferenceRangeModel', () => {
     expect(new ReferenceRangeModel({})).toBeTruthy();
   });
 
+  it('returns the correct display', () => {
+    let range = new ReferenceRangeModel(referenceRangeR4Factory.low({value: 6.2}).high({value: 8.3}).build());
+    let range2 = new ReferenceRangeModel(referenceRangeR4Factory.text('50.3mg/L-109.2mg/L').build());
+
+    expect(range.display()).toEqual('6.2 \u{2013} 8.3')
+    expect(range2.display()).toEqual('50.3mg/L-109.2mg/L')
+  });
+
   describe('parsing data', () => {
     it('parses high and low correctly', () => {
       let range = new ReferenceRangeModel(referenceRangeR4Factory.low({value: 6.2}).high({value: 8.3}).build());
