@@ -1,10 +1,17 @@
-import { CodeableConcept } from "fhir/r4";
+import { CodeableConcept, Coding } from "fhir/r4";
+import { ValueObject } from "../../resources/observation-model";
 
 export class ObservationValueCodeableConceptModel {
   source: CodeableConcept
+  coding?: Coding[]
+  text?: string
+  valueObject: ValueObject
 
-  constructor(value: CodeableConcept) {
-    this.source = value;
+  constructor(fhirData: any) {
+    this.source = fhirData;
+    this.coding = fhirData.coding
+    this.text = fhirData.text
+    this.valueObject = this.parse()
   }
 
   visualizationTypes(): string[] {
@@ -12,7 +19,18 @@ export class ObservationValueCodeableConceptModel {
   }
 
   display(): string {
-    return this.source.text;
+    return this.valueObject.value.toString();
   }
 
+  private parse() {
+    if (this.text) {
+      return { value: this.text }
+    }
+
+    if (!this.coding) {
+      return { value: null }
+    }
+
+    return { value: this.coding[0].display }
+  }
 }

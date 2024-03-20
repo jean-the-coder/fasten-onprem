@@ -7,14 +7,15 @@ class CodableConceptR4Factory extends Factory<{}> {
     })
   }
 
-  coding(display?: string) {
+  coding(params?: {}) {
+    let p = params || {}
     return this.params({
       text: null,
       coding: [
         {
-          system: 'http://loinc.org',
-          code: '15074-8',
-          display: display || 'Glucose [Moles/volume] in Blood'
+          system: p['system'] || 'http://loinc.org',
+          code: p['code'] || '15074-8',
+          display: p['display'] || 'Glucose [Moles/volume] in Blood'
         }
       ]
     })
