@@ -1,5 +1,5 @@
 import {fhirVersions, ResourceType} from '../constants';
-import * as _ from "lodash";
+import _ from "lodash";
 import {CodableConceptModel} from '../datatypes/codable-concept-model';
 import {ReferenceModel} from '../datatypes/reference-model';
 import {FastenDisplayModel} from '../fasten/fasten-display-model';

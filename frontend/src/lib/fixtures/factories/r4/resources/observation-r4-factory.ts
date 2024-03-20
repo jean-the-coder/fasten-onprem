@@ -16,14 +16,15 @@ class ObservationR4Factory extends Factory<{}> {
     })
   }
 
-  valueQuantity(params: {}) {
+  valueQuantity(params?: {}) {
+    let p = params || {}
     return this.params({
       valueQuantity: {
-        value: params['value'] || 6.3,
-        unit: params['unit'] || 'mmol/l',
+        value: p['value'] || 6.3,
+        unit: p['unit'] || 'mmol/l',
         system: 'http://unitsofmeasure.org',
-        code: params['code'] || 'mmol/L',
-        comparator: params['comparator']
+        code: p['code'] || 'mmol/L',
+        comparator: p['comparator']
       }
     })
   }
@@ -188,12 +189,6 @@ export const observationR4Factory = ObservationR4Factory.define(() => (
         display: 'A. Langeveld'
       }
     ],
-    valueQuantity: {
-      value: 6.3,
-      unit: 'mmol/l',
-      system: 'http://unitsofmeasure.org',
-      code: 'mmol/L'
-    },
     interpretation: [
       {
         coding: [
