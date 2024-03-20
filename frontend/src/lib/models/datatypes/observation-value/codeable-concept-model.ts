@@ -19,7 +19,7 @@ export class ObservationValueCodeableConceptModel {
   }
 
   display(): string {
-    return this.valueObject.value.toString();
+    return this.valueObject.value?.toString() || '';
   }
 
   private parse() {
