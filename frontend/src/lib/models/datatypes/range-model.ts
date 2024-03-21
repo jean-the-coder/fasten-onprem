@@ -1,22 +1,23 @@
-import { Quantity, Range } from "fhir/r4";
+import { Range } from "fhir/r4";
 import { QuantityModel } from "./quantity-model";
+import _ from "lodash";
 
 export class RangeModel implements Range {
-  low?: Quantity
-  high?: Quantity
+  low?: QuantityModel
+  high?: QuantityModel
 
   constructor(fhirData: any) {
-    this.low = new QuantityModel(fhirData['low']);
-    this.high = new QuantityModel(fhirData['high']);
+    this.low = new QuantityModel(_.get(fhirData, 'low'));
+    this.high = new QuantityModel(_.get(fhirData, 'high'));
   }
 
-  display(unit?: string): string {
-    if (this.low.value && this.high.value) {
-      return [this.low.value, '\u{2013}', this.high.value, unit].join(' ').trim();
-    } else if (this.low.value) {
-      return ['>', this.low.value, unit].join(' ').trim();
-    } else if (this.high.value) {
-      return ['>', this.high.value, unit].join(' ').trim();
+  display(): string {
+    if (this.low.hasValue() && this.high.hasValue()) {
+      return [this.low.display(), '\u{2013}', this.high.display()].join(' ').trim();
+    } else if (this.low.hasValue()) {
+      return ['>', this.low.display()].join(' ').trim();
+    } else if (this.high.hasValue()) {
+      return ['<', this.high.display()].join(' ').trim();
     }
 
     return '';

@@ -7,9 +7,9 @@ import { CodeableConcept, ObservationReferenceRange, Quantity, Range, RatioRange
 // https://www.hl7.org/fhir/R4/observation-definitions.html#Observation.referenceRange
 // Must have high or low or text
 export class ReferenceRangeModel implements ObservationReferenceRange {
-  low?: Quantity
+  low?: Quantity // Simple Quantity (no comparator)
   low_value?: number
-  high?: Quantity
+  high?: Quantity // Simple Quantity (no comparator)
   high_value?: number
   type?: CodeableConcept
   appliesTo?: CodeableConcept[]

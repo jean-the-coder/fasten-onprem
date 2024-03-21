@@ -30,7 +30,7 @@ export class QuantityModel implements Quantity {
   }
 
   display(): string {
-    return [this.comparator, this.value, this.unit].join(' ')
+    return [this.comparator, this.value, this.unit].join(' ').trim()
   }
 
   private parseValue(): {} {
