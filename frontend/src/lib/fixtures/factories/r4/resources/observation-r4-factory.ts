@@ -60,12 +60,20 @@ class ObservationR4Factory extends Factory<{}> {
     })
   }
 
-  // valueRange(range?: Range) {
-  //   return this.params({
-  //     valueQuantity: null,
-  //     // valueString: value || '5.5mmol/l'
-  //   })
-  // }
+  dataAbsent() {
+    return this.params({
+      dataAbsentReason: {
+        coding: [
+          {
+            system: 'http://terminology.hl7.org/CodeSystem/data-absent-reason',
+            code: 'unknown',
+            display: 'Error'
+          }
+        ],
+        text: 'Error'
+      }
+    })
+  }
 
   referenceRange(high?: number, low?: number) {
     return this.params({

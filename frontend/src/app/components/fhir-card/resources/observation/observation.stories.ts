@@ -52,3 +52,12 @@ export const CodeableConcept: Story = {
     displayModel: observation2
   }
 };
+
+let observation3 = new ObservationModel(observationR4Factory.dataAbsent().build(), fhirVersions.R4);
+observation.source_id = '123-456-789'
+observation.source_resource_id = '123-456-789'
+export const DataAbsent: Story = {
+  args: {
+    displayModel: observation3
+  }
+};

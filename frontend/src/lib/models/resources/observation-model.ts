@@ -10,6 +10,7 @@ import { ObservationValueIntegerModel } from '../datatypes/observation-value/int
 import { ObservationValueBooleanModel } from '../datatypes/observation-value/boolean-model';
 import { ObservationValueCodeableConceptModel } from '../datatypes/observation-value/codeable-concept-model';
 import { ReferenceRangeModel } from '../datatypes/reference-range-model';
+import { DataAbsentReason } from '../datatypes/data-absent-reason-model';
 
 // should have one or the other
 export interface ValueObject {
@@ -49,5 +50,6 @@ export class ObservationModel extends FastenDisplayModel {
     if (_.get(fhirResource, 'valueInteger')) { this.value_model = new ObservationValueIntegerModel(fhirResource['valueInteger']) }
     if (_.get(fhirResource, 'valueBoolean')) { this.value_model = new ObservationValueBooleanModel(fhirResource['valueBoolean']) }
     if (_.get(fhirResource, 'valueCodeableConcept')) { this.value_model = new ObservationValueCodeableConceptModel(fhirResource['valueCodeableConcept']) }
+    if (_.get(fhirResource, 'dataAbsentReason')) { this.value_model = new DataAbsentReason(fhirResource['dataAbsentReason']) }
   }
 }
