@@ -2,7 +2,7 @@ import { CodeableConcept, Coding } from "fhir/r4";
 import { ValueObject } from "../resources/observation-model";
 import { ObservationValueCodeableConceptModel } from "./observation-value/codeable-concept-model";
 
-export class DataAbsentReason extends ObservationValueCodeableConceptModel {
+export class DataAbsentReasonModel extends ObservationValueCodeableConceptModel {
   source: CodeableConcept
   coding?: Coding[]
   text?: string
@@ -13,6 +13,6 @@ export class DataAbsentReason extends ObservationValueCodeableConceptModel {
   }
 
   display(): string {
-    return `${this.valueObject.value?.toString()} (data absent)`;
+    return `${this.valueObject.value?.toString() || ''} (data absent)`.trim();
   }
 }
