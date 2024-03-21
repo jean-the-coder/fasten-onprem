@@ -1,7 +1,7 @@
 import { CodeableConcept, Coding } from "fhir/r4";
-import { ValueObject } from "../../resources/observation-model";
+import { ObservationValue, ValueObject } from "../../resources/observation-model";
 
-export class ObservationValueCodeableConceptModel {
+export class ObservationValueCodeableConceptModel implements ObservationValue {
   source: CodeableConcept
   coding?: Coding[]
   text?: string

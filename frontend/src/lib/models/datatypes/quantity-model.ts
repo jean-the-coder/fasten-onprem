@@ -1,10 +1,10 @@
 import { Quantity } from 'fhir/r4';
-import { ValueObject } from '../resources/observation-model';
+import { ObservationValue, ValueObject } from '../resources/observation-model';
 import _ from 'lodash';
 
 // https://www.hl7.org/fhir/R4/datatypes.html#Quantity
 // Also used for SimpleQuantity which is Quantity but with the rule that 'comparator' should not be set
-export class QuantityModel implements Quantity {
+export class QuantityModel implements Quantity, ObservationValue {
   value?: number
   comparator?: '<' | '<=' | '>=' | '>'
   unit?: string

@@ -18,6 +18,12 @@ export interface ValueObject {
   value?: number | string | boolean | null
 }
 
+export interface ObservationValue {
+  display(): string
+  visualizationTypes(): string[]
+  valueObject: ValueObject
+}
+
 // https://www.hl7.org/fhir/R4/observation.html
 export class ObservationModel extends FastenDisplayModel {
   code: CodableConceptModel | undefined
@@ -29,7 +35,7 @@ export class ObservationModel extends FastenDisplayModel {
   fhirResource: any
   reference_range: any
 
-  value_model: QuantityModel | ObservationValueStringModel | ObservationValueIntegerModel | ObservationValueBooleanModel | ObservationValueCodeableConceptModel
+  value_model: ObservationValue
 
   constructor(fhirResource: any, fhirVersion?: fhirVersions, fastenOptions?: FastenOptions) {
     super(fastenOptions)
