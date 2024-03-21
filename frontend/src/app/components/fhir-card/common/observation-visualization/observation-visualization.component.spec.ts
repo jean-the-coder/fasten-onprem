@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ObservationBarChartComponent } from './observation-bar-chart.component';
+import { ObservationVisualizationComponent } from './observation-visualization.component';
 import { ObservationModel } from 'src/lib/models/resources/observation-model';
 import { observationR4Factory } from 'src/lib/fixtures/factories/r4/resources/observation-r4-factory';
 import { fhirVersions } from 'src/lib/models/constants';
 
-describe('ObservationBarChartComponent', () => {
-  let component: ObservationBarChartComponent;
-  let fixture: ComponentFixture<ObservationBarChartComponent>;
+describe('ObservationVisualizationComponent', () => {
+  let component: ObservationVisualizationComponent;
+  let fixture: ComponentFixture<ObservationVisualizationComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ ObservationBarChartComponent ]
+      imports: [ ObservationVisualizationComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ObservationBarChartComponent);
+    fixture = TestBed.createComponent(ObservationVisualizationComponent);
     component = fixture.componentInstance;
     component.observations = [
       new ObservationModel(observationR4Factory.valueQuantity().build(), fhirVersions.R4),

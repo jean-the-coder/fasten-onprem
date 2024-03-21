@@ -10,7 +10,7 @@ import { CommonModule, formatDate } from '@angular/common';
   styleUrls: ['./observation-table.component.scss']
 })
 export class ObservationTableComponent implements OnInit {
-  @Input() observations: [ObservationModel]
+  @Input() observations: ObservationModel[]
 
   tableData = []
 
