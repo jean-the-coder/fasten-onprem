@@ -2,6 +2,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ObservationComponent } from './observation.component';
 import {RouterTestingModule} from '@angular/router/testing';
+import { ObservationModel } from 'src/lib/models/resources/observation-model';
+import { observationR4Factory } from 'src/lib/fixtures/factories/r4/resources/observation-r4-factory';
+import { fhirVersions } from 'src/lib/models/constants';
 
 describe('ObservationComponent', () => {
   let component: ObservationComponent;
@@ -15,10 +18,17 @@ describe('ObservationComponent', () => {
 
     fixture = TestBed.createComponent(ObservationComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
+    fixture.detectChanges();
     expect(component).toBeTruthy();
+  });
+
+  it('should not display a visualization if table is the only visualization type', () => {
+    component.displayModel = new ObservationModel(observationR4Factory.valueCodeableConcept().build(), fhirVersions.R4);
+    fixture.detectChanges();
+
+    expect(component.displayVisualization).toBeFalse();
   });
 });
