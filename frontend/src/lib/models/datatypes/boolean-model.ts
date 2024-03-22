@@ -1,6 +1,6 @@
-import { ObservationValue, ValueObject } from "../../resources/observation-model";
+import { ObservationValue, ValueObject } from "../resources/observation-model";
 
-export class ObservationValueBooleanModel implements ObservationValue {
+export class BooleanModel implements ObservationValue {
   source: boolean
 
   constructor(value: boolean) {

@@ -5,12 +5,12 @@ import {ReferenceModel} from '../datatypes/reference-model';
 import {FastenDisplayModel} from '../fasten/fasten-display-model';
 import {FastenOptions} from '../fasten/fasten-options';
 import { QuantityModel } from '../datatypes/quantity-model';
-import { ObservationValueStringModel } from '../datatypes/observation-value/string-model';
-import { ObservationValueIntegerModel } from '../datatypes/observation-value/integer-model';
-import { ObservationValueBooleanModel } from '../datatypes/observation-value/boolean-model';
+import { StringModel } from '../datatypes/string-model';
+import { IntegerModel } from '../datatypes/integer-model';
+import { BooleanModel } from '../datatypes/boolean-model';
 import { ObservationValueCodeableConceptModel } from '../datatypes/observation-value/codeable-concept-model';
 import { ReferenceRangeModel } from '../datatypes/reference-range-model';
-import { ObservationValueDataAbsentReasonModel } from '../datatypes/observation-value/data-absent-reason-model';
+import { DataAbsentReasonModel } from '../datatypes/data-absent-reason-model';
 
 // should have either range or value
 export interface ValueObject {
@@ -52,10 +52,10 @@ export class ObservationModel extends FastenDisplayModel {
     // TODO: there are more value types that can be set: valueRange, valueRatio, valueSampledData, valueTime, valueDateTime, valuePeriod
     // TODO: It is possible for values to be set in the Component element instead of any value component from above. Figure out what to do for that
     if (_.get(fhirResource, 'valueQuantity')) { this.value_model = new QuantityModel(fhirResource['valueQuantity']) }
-    if (_.get(fhirResource, 'valueString')) { this.value_model = new ObservationValueStringModel(fhirResource['valueString']) }
-    if (_.get(fhirResource, 'valueInteger')) { this.value_model = new ObservationValueIntegerModel(fhirResource['valueInteger']) }
-    if (_.get(fhirResource, 'valueBoolean')) { this.value_model = new ObservationValueBooleanModel(fhirResource['valueBoolean']) }
+    if (_.get(fhirResource, 'valueString')) { this.value_model = new StringModel(fhirResource['valueString']) }
+    if (_.get(fhirResource, 'valueInteger')) { this.value_model = new IntegerModel(fhirResource['valueInteger']) }
+    if (_.get(fhirResource, 'valueBoolean')) { this.value_model = new BooleanModel(fhirResource['valueBoolean']) }
     if (_.get(fhirResource, 'valueCodeableConcept')) { this.value_model = new ObservationValueCodeableConceptModel(fhirResource['valueCodeableConcept']) }
-    if (_.get(fhirResource, 'dataAbsentReason')) { this.value_model = new ObservationValueDataAbsentReasonModel(fhirResource['dataAbsentReason']) }
+    if (_.get(fhirResource, 'dataAbsentReason')) { this.value_model = new DataAbsentReasonModel(fhirResource['dataAbsentReason']) }
   }
 }

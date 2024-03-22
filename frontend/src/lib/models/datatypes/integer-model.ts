@@ -1,6 +1,6 @@
-import { ObservationValue, ValueObject } from "../../resources/observation-model";
+import { ObservationValue, ValueObject } from "../resources/observation-model";
 
-export class ObservationValueIntegerModel implements ObservationValue {
+export class IntegerModel implements ObservationValue {
   soruceValue: number
 
   constructor(value: number) {

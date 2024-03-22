@@ -1,6 +1,6 @@
-import { ObservationValue, ValueObject } from "../../resources/observation-model";
+import { ObservationValue, ValueObject } from "../resources/observation-model";
 
-export class ObservationValueStringModel implements ObservationValue {
+export class StringModel implements ObservationValue {
   sourceString: string
 
   constructor(str: string) {

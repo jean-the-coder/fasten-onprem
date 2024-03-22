@@ -2,12 +2,12 @@ import { ObservationModel } from './observation-model';
 import { fhirVersions } from '../constants';
 import { observationR4Factory } from 'src/lib/fixtures/factories/r4/resources/observation-r4-factory';
 import { QuantityModel } from '../datatypes/quantity-model';
-import { ObservationValueStringModel } from '../datatypes/observation-value/string-model';
-import { ObservationValueIntegerModel } from '../datatypes/observation-value/integer-model';
-import { ObservationValueBooleanModel } from '../datatypes/observation-value/boolean-model';
+import { StringModel } from '../datatypes/string-model';
+import { IntegerModel } from '../datatypes/integer-model';
+import { BooleanModel } from '../datatypes/boolean-model';
 import { ObservationValueCodeableConceptModel } from '../datatypes/observation-value/codeable-concept-model';
 import { ReferenceRangeModel } from '../datatypes/reference-range-model';
-import { ObservationValueDataAbsentReasonModel } from '../datatypes/observation-value/data-absent-reason-model';
+import { DataAbsentReasonModel } from '../datatypes/data-absent-reason-model';
 
 describe('ObservationModel', () => {
   it('should create an instance', () => {
@@ -32,19 +32,19 @@ describe('ObservationModel', () => {
     it('is a ObservationValueStringModel if valueString is set', () => {
       let observation = new ObservationModel(observationR4Factory.valueString().build(), fhirVersions.R4);
 
-      expect(observation.value_model).toBeInstanceOf(ObservationValueStringModel);
+      expect(observation.value_model).toBeInstanceOf(StringModel);
     });
 
     it('is a ObservationValueIntegerModel if valueInteger is set', () => {
       let observation = new ObservationModel(observationR4Factory.valueInteger().build(), fhirVersions.R4);
 
-      expect(observation.value_model).toBeInstanceOf(ObservationValueIntegerModel);
+      expect(observation.value_model).toBeInstanceOf(IntegerModel);
     });
 
     it('is a ObservationValueBooleanModel if valueBoolean is set', () => {
       let observation = new ObservationModel(observationR4Factory.valueBoolean().build(), fhirVersions.R4);
 
-      expect(observation.value_model).toBeInstanceOf(ObservationValueBooleanModel);
+      expect(observation.value_model).toBeInstanceOf(BooleanModel);
     });
 
     it('is a ObservationValueCodeableConceptModel if valueCodeableConcept is set', () => {
@@ -56,7 +56,7 @@ describe('ObservationModel', () => {
     it('is a ObservationValueDataAbsentReasonModel if dataAbsentReason is set', () => {
       let observation = new ObservationModel(observationR4Factory.dataAbsent().build(), fhirVersions.R4);
 
-      expect(observation.value_model).toBeInstanceOf(ObservationValueDataAbsentReasonModel);
+      expect(observation.value_model).toBeInstanceOf(DataAbsentReasonModel);
     });
   });
 });
