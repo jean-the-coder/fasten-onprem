@@ -12,7 +12,7 @@ import { ObservationValueCodeableConceptModel } from '../datatypes/observation-v
 import { ReferenceRangeModel } from '../datatypes/reference-range-model';
 import { ObservationValueDataAbsentReasonModel } from '../datatypes/observation-value/data-absent-reason-model';
 
-// should have one or the other
+// should have either range or value
 export interface ValueObject {
   range?: { low?: number | null, high?: number | null }
   value?: number | string | boolean | null
