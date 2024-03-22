@@ -1,5 +1,4 @@
 import { CodeableConcept, Coding } from "fhir/r4";
-import { ValueObject } from "../../resources/observation-model";
 import { ObservationValueCodeableConceptModel } from "./codeable-concept-model";
 
 // Technically not its own fhir datatype. But for observations, either a value or dataAbsentReason
@@ -10,13 +9,12 @@ export class ObservationValueDataAbsentReasonModel extends ObservationValueCodea
   source: CodeableConcept
   coding?: Coding[]
   text?: string
-  valueObject: ValueObject
 
   constructor(fhirData: any) {
     super(fhirData)
   }
 
   display(): string {
-    return `${this.valueObject.value?.toString() || ''} (data absent)`.trim();
+    return `${this.valueObject().value?.toString() || ''} (data absent)`.trim();
   }
 }

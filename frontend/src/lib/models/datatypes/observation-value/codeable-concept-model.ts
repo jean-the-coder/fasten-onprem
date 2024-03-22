@@ -5,13 +5,11 @@ export class ObservationValueCodeableConceptModel implements ObservationValue {
   source: CodeableConcept
   coding?: Coding[]
   text?: string
-  valueObject: ValueObject
 
   constructor(fhirData: any) {
     this.source = fhirData;
     this.coding = fhirData.coding
     this.text = fhirData.text
-    this.valueObject = this.parse()
   }
 
   visualizationTypes(): string[] {
@@ -19,10 +17,10 @@ export class ObservationValueCodeableConceptModel implements ObservationValue {
   }
 
   display(): string {
-    return this.valueObject.value?.toString() || '';
+    return this.valueObject().value?.toString() || '';
   }
 
-  private parse() {
+  valueObject(): ValueObject {
     if (this.text) {
       return { value: this.text }
     }

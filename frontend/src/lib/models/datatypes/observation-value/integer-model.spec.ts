@@ -12,7 +12,7 @@ import { ObservationValueIntegerModel } from "./integer-model";
     it('sets valueObject correctl', () => {
       let model = new ObservationValueIntegerModel(6.3);
 
-      expect(model.valueObject).toEqual({ value: 6.3 });
+      expect(model.valueObject()).toEqual({ value: 6.3 });
     });
 
     it('returns the correct display', () => {

@@ -17,24 +17,24 @@ import { ObservationValueStringModel } from "./string-model";
           let stringValue = new ObservationValueStringModel('6.3 IntlUnit/mL');
           let stringValue2 = new ObservationValueStringModel('6.3 mml/min/1.03');
 
-          expect(stringValue.valueObject).toEqual({ value: 6.3 });
-          expect(stringValue2.valueObject).toEqual({ value: 6.3 });
+          expect(stringValue.valueObject()).toEqual({ value: 6.3 });
+          expect(stringValue2.valueObject()).toEqual({ value: 6.3 });
         });
 
         it('sets range correctly if there is a range', () => {
           let stringValue = new ObservationValueStringModel('5 - 10 IntlUnit/mL');
           let stringValue2 = new ObservationValueStringModel('5-10 IntlUnit/mL');
 
-          expect(stringValue.valueObject).toEqual({ range: { low: 5, high: 10 } });
-          expect(stringValue2.valueObject).toEqual({ range: { low: 5, high: 10 } });
+          expect(stringValue.valueObject()).toEqual({ range: { low: 5, high: 10 } });
+          expect(stringValue2.valueObject()).toEqual({ range: { low: 5, high: 10 } });
         });
 
         it('sets range correctly if there is a comparator', () => {
           let stringValue = new ObservationValueStringModel('< 10 IntlUnit/mL');
           let stringValue2 = new ObservationValueStringModel('>10 IntlUnit/mL');
 
-          expect(stringValue.valueObject).toEqual({ range: { low: null, high: 10 } });
-          expect(stringValue2.valueObject).toEqual({ range: { low: 10, high: null } });
+          expect(stringValue.valueObject()).toEqual({ range: { low: null, high: 10 } });
+          expect(stringValue2.valueObject()).toEqual({ range: { low: 10, high: null } });
         });
       });
 
@@ -42,7 +42,7 @@ import { ObservationValueStringModel } from "./string-model";
         it('sets the value to the passed string', () => {
           let stringValue = new ObservationValueStringModel('Negative');
 
-          expect(stringValue.valueObject).toEqual({ value: 'Negative' });
+          expect(stringValue.valueObject()).toEqual({ value: 'Negative' });
         });
       });
     });

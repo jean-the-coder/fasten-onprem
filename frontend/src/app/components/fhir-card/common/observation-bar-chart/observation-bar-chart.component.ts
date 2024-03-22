@@ -130,7 +130,7 @@ export class ObservationBarChartComponent implements OnInit {
       // maybe have methods for <visualizationType>ChartData that returns the expected value.
       // TODO: figure out after I try implementing some other chart types
       // @ts-ignore
-      let valueObject = observation.value_model.valueObject;
+      let valueObject = observation.value_model.valueObject();
 
       if (valueObject.range) {
         currentValues.push([valueObject.range.low, valueObject.range.high]);

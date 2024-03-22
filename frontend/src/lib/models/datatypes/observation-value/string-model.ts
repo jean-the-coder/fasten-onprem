@@ -2,15 +2,13 @@ import { ObservationValue, ValueObject } from "../../resources/observation-model
 
 export class ObservationValueStringModel implements ObservationValue {
   sourceString: string
-  valueObject: ValueObject
 
   constructor(str: string) {
     this.sourceString = str || '';
-    this.valueObject = this.parseValueString();
   }
 
   visualizationTypes(): string[] {
-    if (!!this.valueObject.range || Number.isFinite(this.valueObject.value)) {
+    if (!!this.valueObject().range || Number.isFinite(this.valueObject().value)) {
       return ['bar', 'table'];
     }
 
@@ -21,7 +19,7 @@ export class ObservationValueStringModel implements ObservationValue {
     return this.sourceString;
   }
 
-  private parseValueString(): {} {
+  valueObject(): ValueObject {
     let matches = this.sourceString?.match(/(?<value1>[\d.]*)?(?<operator>[^\d]*)?(?<value2>[\d.]*)?/)
 
     switch (matches.groups['operator']?.trim()) {

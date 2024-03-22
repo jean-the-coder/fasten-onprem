@@ -21,7 +21,7 @@ export interface ValueObject {
 export interface ObservationValue {
   display(): string
   visualizationTypes(): string[]
-  valueObject: ValueObject
+  valueObject(): ValueObject
 }
 
 // https://www.hl7.org/fhir/R4/observation.html

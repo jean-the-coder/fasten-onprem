@@ -2,11 +2,9 @@ import { ObservationValue, ValueObject } from "../../resources/observation-model
 
 export class ObservationValueBooleanModel implements ObservationValue {
   source: boolean
-  valueObject: ValueObject
 
   constructor(value: boolean) {
     this.source = value;
-    this.valueObject = { value: value }
   }
 
   visualizationTypes(): string[] {
@@ -15,6 +13,10 @@ export class ObservationValueBooleanModel implements ObservationValue {
 
   display(): string {
     return this.source.toString();
+  }
+
+  valueObject(): ValueObject {
+    return { value: this.source };
   }
 
 }

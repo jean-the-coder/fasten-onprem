@@ -2,11 +2,9 @@ import { ObservationValue, ValueObject } from "../../resources/observation-model
 
 export class ObservationValueIntegerModel implements ObservationValue {
   soruceValue: number
-  valueObject: ValueObject
 
   constructor(value: number) {
     this.soruceValue = value;
-    this.valueObject = { value: value }
   }
 
   visualizationTypes(): string[] {
@@ -17,4 +15,7 @@ export class ObservationValueIntegerModel implements ObservationValue {
     return this.soruceValue.toString();
   }
 
+  valueObject(): ValueObject {
+    return { value: this.soruceValue }
+  }
 }

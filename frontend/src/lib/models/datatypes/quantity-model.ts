@@ -10,7 +10,6 @@ export class QuantityModel implements Quantity, ObservationValue {
   unit?: string
   system?: string
   code?: string
-  valueObject: ValueObject
 
   constructor(fhirData: any) {
     this.value = _.get(fhirData, 'value');
@@ -18,7 +17,6 @@ export class QuantityModel implements Quantity, ObservationValue {
     this.unit = _.get(fhirData, 'unit');
     this.system = _.get(fhirData, 'system');
     this.code = _.get(fhirData, 'code');
-    this.valueObject = this.parseValue();
   }
 
   visualizationTypes(): string[] {
@@ -33,7 +31,7 @@ export class QuantityModel implements Quantity, ObservationValue {
     return [this.comparator, this.value, this.unit].join(' ').trim()
   }
 
-  private parseValue(): {} {
+  valueObject(): ValueObject {
     switch (this.comparator) {
       case '<':
       case '<=':

@@ -13,8 +13,8 @@ describe('ObservationValueBooleanModel', () => {
     let model = new ObservationValueBooleanModel(true);
     let model2 = new ObservationValueBooleanModel(false);
 
-    expect(model.valueObject).toEqual({ value: true });
-    expect(model2.valueObject).toEqual({ value: false });
+    expect(model.valueObject()).toEqual({ value: true });
+    expect(model2.valueObject()).toEqual({ value: false });
   });
 
   it ('returns correct display', () => {

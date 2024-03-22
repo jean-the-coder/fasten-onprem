@@ -14,17 +14,17 @@ describe('DataAbsentReasonModel', () => {
     it('uses text if it is set', () => {
       let model = new ObservationValueDataAbsentReasonModel(codeableConceptR4Factory.text('Unknown').build());
 
-      expect(model.valueObject).toEqual({ value: 'Unknown' });
+      expect(model.valueObject()).toEqual({ value: 'Unknown' });
     });
 
     it('uses the first coding display if text is not set', () => {
       let model = new ObservationValueDataAbsentReasonModel(codeableConceptR4Factory.coding({ display: 'Unknown' }).build());
 
-      expect(model.valueObject).toEqual({ value: 'Unknown' });
+      expect(model.valueObject()).toEqual({ value: 'Unknown' });
     });
 
     it('does not error when data is malformed', () => {
-      expect(new ObservationValueDataAbsentReasonModel({}).valueObject).toEqual({ value: null });
+      expect(new ObservationValueDataAbsentReasonModel({}).valueObject()).toEqual({ value: null });
     });
   });
 
