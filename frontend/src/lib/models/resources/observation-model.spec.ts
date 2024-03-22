@@ -7,7 +7,7 @@ import { ObservationValueIntegerModel } from '../datatypes/observation-value/int
 import { ObservationValueBooleanModel } from '../datatypes/observation-value/boolean-model';
 import { ObservationValueCodeableConceptModel } from '../datatypes/observation-value/codeable-concept-model';
 import { ReferenceRangeModel } from '../datatypes/reference-range-model';
-import { DataAbsentReasonModel } from '../datatypes/data-absent-reason-model';
+import { ObservationValueDataAbsentReasonModel } from '../datatypes/observation-value/data-absent-reason-model';
 
 describe('ObservationModel', () => {
   it('should create an instance', () => {
@@ -53,10 +53,10 @@ describe('ObservationModel', () => {
       expect(observation.value_model).toBeInstanceOf(ObservationValueCodeableConceptModel);
     });
 
-    it('is a ObservationValueCodeableConceptModel if valueCodeableConcept is set', () => {
+    it('is a ObservationValueDataAbsentReasonModel if dataAbsentReason is set', () => {
       let observation = new ObservationModel(observationR4Factory.dataAbsent().build(), fhirVersions.R4);
 
-      expect(observation.value_model).toBeInstanceOf(DataAbsentReasonModel);
+      expect(observation.value_model).toBeInstanceOf(ObservationValueDataAbsentReasonModel);
     });
   });
 });

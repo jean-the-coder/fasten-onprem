@@ -29,6 +29,10 @@ export class ReferenceRangeModel implements ObservationReferenceRange {
     this.high_value = standardizedValues.high;
   }
 
+  hasValue(): boolean {
+    return !!this.text || !!this.low_value || !!this.high_value;
+  }
+
   display(): string {
     return this.text || new RangeModel({low: this.low, high: this.high}).display()
   }

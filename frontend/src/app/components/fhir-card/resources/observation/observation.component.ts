@@ -65,7 +65,7 @@ export class ObservationComponent implements OnInit {
       {
         label: 'Reference',
         data: this.displayModel?.reference_range.display(),
-        enabled: !!this.displayModel?.reference_range,
+        enabled: !!this.displayModel?.reference_range.hasValue(),
       }
     )
   }
