@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { ObservationValueCodeableConceptModel } from "./observation-value/codeable-concept-model";
+import { ObservationValueCodeableConceptModel } from "./observation-value-codeable-concept-model";
 import { QuantityModel } from "./quantity-model";
 import { RangeModel } from "./range-model";
 import { CodeableConcept, ObservationReferenceRange, Quantity, Range, RatioRange } from "fhir/r4";

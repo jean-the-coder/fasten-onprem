@@ -1,5 +1,5 @@
 import { codeableConceptR4Factory } from "src/lib/fixtures/factories/r4/datatypes/codeable-concept-r4-factory";
-import { ObservationValueCodeableConceptModel } from "./codeable-concept-model";
+import { ObservationValueCodeableConceptModel } from "./observation-value-codeable-concept-model";
 
 describe('ObservationValueCodeableConceptModel', () => {
   it('should create an instance', () => {

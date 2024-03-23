@@ -1,6 +1,7 @@
 import { CodeableConcept, Coding } from "fhir/r4";
-import { ObservationValue, ValueObject } from "../../resources/observation-model";
+import { ObservationValue, ValueObject } from "../resources/observation-model";
 
+// TODO: merge with the normal CodeableConceptModel.
 export class ObservationValueCodeableConceptModel implements ObservationValue {
   source: CodeableConcept
   coding?: Coding[]

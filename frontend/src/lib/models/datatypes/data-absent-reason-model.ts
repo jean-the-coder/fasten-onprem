@@ -1,5 +1,5 @@
 import { CodeableConcept, Coding } from "fhir/r4";
-import { ObservationValueCodeableConceptModel } from "./observation-value/codeable-concept-model";
+import { ObservationValueCodeableConceptModel } from "./observation-value-codeable-concept-model";
 
 // Technically not its own fhir datatype. But for observations, either a value or dataAbsentReason
 // should be set. This is a wrapper around ObservationValueCodeableConceptModel to hopefully add a little

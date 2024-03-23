@@ -8,7 +8,7 @@ import { QuantityModel } from '../datatypes/quantity-model';
 import { StringModel } from '../datatypes/string-model';
 import { IntegerModel } from '../datatypes/integer-model';
 import { BooleanModel } from '../datatypes/boolean-model';
-import { ObservationValueCodeableConceptModel } from '../datatypes/observation-value/codeable-concept-model';
+import { ObservationValueCodeableConceptModel } from '../datatypes/observation-value-codeable-concept-model';
 import { ReferenceRangeModel } from '../datatypes/reference-range-model';
 import { DataAbsentReasonModel } from '../datatypes/data-absent-reason-model';
 
