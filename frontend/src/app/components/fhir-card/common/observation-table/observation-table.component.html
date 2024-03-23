@@ -1,13 +1,17 @@
 <div class="table-responsive">
 
   <table class="table">
-    <tbody>
-      <tr *ngFor="let rowItem of tableData">
-        <td>
-          <strong>{{rowItem.date}}</strong>
+    <thead>
+      <tr>
+        <td *ngFor="let header of headers">
+          {{header}}
         </td>
-        <td>
-          {{rowItem.value}}
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of rows">
+        <td *ngFor="let data of row">
+          {{data}}
         </td>
       </tr>
     </tbody>

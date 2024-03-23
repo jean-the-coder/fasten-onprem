@@ -33,6 +33,12 @@ export const ValueQuantity: Story = {
   }
 };
 
+export const ValueStringWithRange: Story = {
+  args: {
+    observations: [new ObservationModel(observationR4Factory.valueString().referenceRange().build(), fhirVersions.R4)]
+  }
+};
+
 export const ValueCodableConcept: Story = {
   args: {
     observations: [new ObservationModel(observationR4Factory.valueCodeableConcept().build(), fhirVersions.R4)]

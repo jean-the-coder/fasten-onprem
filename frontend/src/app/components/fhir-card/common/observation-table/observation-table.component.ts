@@ -14,6 +14,9 @@ export class ObservationTableComponent implements OnInit {
 
   tableData = []
 
+  headers: string[] = []
+  rows = []
+
   constructor() { }
 
   ngOnInit(): void {
@@ -21,21 +24,37 @@ export class ObservationTableComponent implements OnInit {
       return;
     }
 
-    for (let observation of this.observations) {
-      let date = ''
-      if (observation.effective_date) {
-        date = formatDate(observation.effective_date, "mediumDate", "en-US", undefined);
-      } else {
-        date = 'Unknown date';
-      }
+    let displayRange = this.rangeExists(this.observations);
 
-      this.tableData.push(
-        {
-          date: date,
-          value: observation.value_model.display()
-        }
-      )
+    if (displayRange) {
+      this.headers = ['Date', 'Result', 'Reference Range'];
+    } else {
+      this.headers = ['Date', 'Result'];
     }
 
+    for (let observation of this.observations) {
+      let date = this.formatDate(observation.effective_date);
+
+      if (displayRange) {
+        this.rows.push(
+          [date, observation.value_model?.display(), observation.reference_range?.display()]);
+      } else {
+        this.rows.push(
+          [date, observation.value_model?.display()]);
+      }
+    }
+
+  }
+
+  private rangeExists(observations: ObservationModel[]): boolean {
+    return observations.some((observation) => { return observation.reference_range?.hasValue() })
+  }
+
+  private formatDate(date: string | number | Date): string {
+    if (date) {
+      return formatDate(date, "mediumDate", "en-US", undefined);
+    } else {
+      return 'Unknown date';
+    }
   }
 }
