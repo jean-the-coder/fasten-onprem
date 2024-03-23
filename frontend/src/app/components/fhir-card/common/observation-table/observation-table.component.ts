@@ -12,10 +12,8 @@ import { CommonModule, formatDate } from '@angular/common';
 export class ObservationTableComponent implements OnInit {
   @Input() observations: ObservationModel[]
 
-  tableData = []
-
   headers: string[] = []
-  rows = []
+  rows: string[][] = []
 
   constructor() { }
 
@@ -28,22 +26,15 @@ export class ObservationTableComponent implements OnInit {
 
     if (displayRange) {
       this.headers = ['Date', 'Result', 'Reference Range'];
+      this.rows = this.observations.map((observation) => {
+        return [this.formatDate(observation.effective_date), observation.value_model?.display(), observation.reference_range?.display()];
+      });
     } else {
       this.headers = ['Date', 'Result'];
+      this.rows = this.observations.map((observation) => {
+        return [this.formatDate(observation.effective_date), observation.value_model?.display()];
+      });
     }
-
-    for (let observation of this.observations) {
-      let date = this.formatDate(observation.effective_date);
-
-      if (displayRange) {
-        this.rows.push(
-          [date, observation.value_model?.display(), observation.reference_range?.display()]);
-      } else {
-        this.rows.push(
-          [date, observation.value_model?.display()]);
-      }
-    }
-
   }
 
   private rangeExists(observations: ObservationModel[]): boolean {
