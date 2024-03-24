@@ -33,9 +33,7 @@ export class ObservationBarChartComponent implements OnInit {
       },
       tooltip: {
         callbacks: {
-          label: function(context) {
-            return `${context.dataset.label}: ${context.dataset.dataLabels[context.dataIndex]}`;
-          }
+          label: this.formatTooltip
         }
       }
     },
@@ -55,9 +53,7 @@ export class ObservationBarChartComponent implements OnInit {
       // @ts-ignore
       tooltip: {
         callbacks: {
-          label: function(context) {
-            return `${context.dataset.label}: ${context.dataset.dataLabels[context.dataIndex]}`;
-          }
+          label: this.formatTooltip
         }
       }
     }
@@ -121,47 +117,63 @@ export class ObservationBarChartComponent implements OnInit {
     let referenceRanges = []
 
     for(let observation of this.observations) {
-      let refRange = observation.reference_range;
+      referenceRanges.push(this.extractReferenceRange(observation));
+      this.barChartData[0]['dataLabels'].push(observation.reference_range.display());
 
-      referenceRanges.push([refRange.low_value || 0, refRange.high_value || 0]);
-      this.barChartData[0]['dataLabels'].push(refRange.display());
-
-      // debating pushing this value logic into the value_model.
-      // maybe have methods for <visualizationType>ChartData that returns the expected value.
-      // TODO: figure out after I try implementing some other chart types
-      // @ts-ignore
-      let valueObject = observation.value_model.valueObject();
-
-      if (valueObject.range) {
-        currentValues.push([valueObject.range.low, valueObject.range.high]);
-      } else {
-        currentValues.push([valueObject.value, valueObject.value])
-      }
-
+      currentValues.push(this.extractCurrentValue(observation));
       this.barChartData[1]['dataLabels'].push(observation.value_model.display());
 
-      if (observation.effective_date) {
-        this.barChartLabels.push(formatDate(observation.effective_date, "mediumDate", "en-US", undefined));
-      } else {
-        this.barChartLabels.push('Unknown date');
-      }
+      this.barChartLabels.push(this.formatDate(observation.effective_date))
     }
 
-    let xAxisMax = Math.max(...currentValues.map(set => set[1])) * 1.3;
+    let xAxisMax = Math.max(...currentValues.flat()) * 1.3;
     this.barChartOptions.scales['x']['max'] = xAxisMax
 
-    let updatedRefRanges = referenceRanges.map(range => {
-      if (range[0] && !range[1]) {
-        return [range[0], xAxisMax]
-      } else {
-        return [range[0], range[1]]
-      }
-    });
-
     // @ts-ignore
-    this.barChartData[0].data = updatedRefRanges
-    this.barChartData[1].data = currentValues
+    this.barChartData[0].data = this.updateNullMax(referenceRanges, xAxisMax);
+    // @ts-ignore
+    this.barChartData[1].data = this.updateNullMax(currentValues, xAxisMax);
 
     this.chartHeight = defaultChartHeight + (defaultChartEntryHeight * currentValues.length)
+  }
+
+  private extractReferenceRange(observation: ObservationModel): [number, number] {
+    let refRange = observation.reference_range;
+
+    return [refRange.low_value || 0, refRange.high_value || 0]
+  }
+
+  private extractCurrentValue(observation: ObservationModel): [any, any] {
+    let valueObject = observation.value_model.valueObject();
+
+    if (valueObject.range) {
+      return [valueObject.range.low, valueObject.range.high];
+    } else {
+      return [valueObject.value, valueObject.value]
+    }
+  }
+
+  // Helper method to update any [number, null] set to [number, max].
+  // Necessary in order to display greater-than ranges that have no upper bound.
+  private updateNullMax(array: any[][], max: number): any[][] {
+    return array.map(values => {
+      if (values[0] && !values[1]) {
+        return [values[0], max]
+      } else {
+        return [values[0], values[1]]
+      }
+    });
+  }
+
+  private formatDate(date: string | number | Date): string {
+    if (date) {
+      return formatDate(date, "mediumDate", "en-US", undefined);
+    } else {
+      return 'Unknown date';
+    }
+  }
+
+  private formatTooltip(context) {
+    return `${context.dataset.label}: ${context.dataset.dataLabels[context.dataIndex]}`;
   }
 }

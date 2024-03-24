@@ -75,7 +75,7 @@ class ObservationR4Factory extends Factory<{}> {
     })
   }
 
-  referenceRange(high?: number, low?: number) {
+  referenceRange(low?: number, high?: number) {
     return this.params({
       referenceRange: [
         {
