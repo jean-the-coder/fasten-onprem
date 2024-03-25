@@ -1,10 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ObservationComponent } from './observation.component';
-import {RouterTestingModule} from '@angular/router/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { ObservationModel } from 'src/lib/models/resources/observation-model';
 import { observationR4Factory } from 'src/lib/fixtures/factories/r4/resources/observation-r4-factory';
 import { fhirVersions } from 'src/lib/models/constants';
+import { By } from '@angular/platform-browser';
 
 describe('ObservationComponent', () => {
   let component: ObservationComponent;
@@ -30,5 +31,6 @@ describe('ObservationComponent', () => {
     fixture.detectChanges();
 
     expect(component.displayVisualization).toBeFalse();
+    expect(fixture.debugElement.query(By.css('observation-visualization'))).toBeFalsy();
   });
 });
